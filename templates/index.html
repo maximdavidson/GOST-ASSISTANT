@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>ГОСТ Ассистент</title>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+   <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+   <header class="header">
+
+
+      <div class="wrap">
+         <div class="nav">
+            <img src="{{url_for('static', filename = 'logo.png')}}" alt="logo" class="logo">
+            <p class="nav_title" class="logo_text">GOST ASSISTANT</p>
+         </div>
+         <a href="#!" class="sign_up" id="open_pop_up">Войти</a>
+
+      </div>
+
+      <div class="pop_up" id="pop-up">
+         <div class="pop_up_container">
+            <div class="pop_up_close" id="pop-up-close">✖</div>
+            <div class="pop_up_body">
+               <h1>Регистрация</h1>
+               <form action="">
+                  <input type="text" placeholder="Имя пользователя" id="username">
+                  <input type="email" placeholder="Электронная почта" id="email">
+                  <input type="password" placeholder="Пароль" id="password">
+                  <button id="register_btn">Зарегистрироваться</button>
+               </form>
+            </div>
+         </div>
+      </div>
+
+   </header>
+
+   <script src="{{ url_for('static', filename = 'main.js') }}"></script>
+
+</body>
+
+</html>

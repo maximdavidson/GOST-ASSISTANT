@@ -16,7 +16,7 @@
             <img src="{{url_for('static', filename = 'logo.png')}}" alt="logo" class="logo">
             <p class="nav_title" class="logo_text">GOST ASSISTANT</p>
          </div>
-         <a href="#!" class="sign_up" id="open_pop_up">Войти</a>
+         <a href="#!" class="sign_up" id="open_pop_up">Log IN</a>
 
       </div>
 
@@ -24,18 +24,32 @@
          <div class="pop_up_container">
             <div class="pop_up_close" id="pop-up-close">✖</div>
             <div class="pop_up_body">
-               <h1>Регистрация</h1>
+               <h1>Registration</h1>
                <form action="">
                   <input type="text" placeholder="Имя пользователя" id="username">
                   <input type="email" placeholder="Электронная почта" id="email">
                   <input type="password" placeholder="Пароль" id="password">
-                  <button id="register_btn">Зарегистрироваться</button>
+                  <button id="register_btn">Registration</button>
                </form>
             </div>
          </div>
       </div>
 
    </header>
+
+   <section class="section">
+      <div class="section_wrap">
+         <p class="section_text">
+            GOST ASSISTANT
+         </p>
+      </div>
+   </section>
+
+   <section class="btn_send">
+      <div class="btn_send_wrap">
+         <a class="own_btn" href="#!">Upload your text document</a>
+      </div>
+   </section>
 
    <script src="{{ url_for('static', filename = 'main.js') }}"></script>
 

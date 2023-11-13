@@ -115,3 +115,36 @@ header {
 }
 
 /* POP UP */
+
+.section {
+   margin-top: 250px;
+}
+
+.section_text {
+   font-family: 'Julius Sans One', sans-serif;
+   text-align: center;
+   font-size: 16px;
+   opacity: 70%;
+}
+
+
+.btn_send {
+   margin-top: 250px;
+}
+
+.btn_send_wrap {
+   text-align: center;
+}
+
+.own_btn {
+   text-decoration: none;
+   color: #000;
+   background: #d88989;
+   border-radius: 10px;
+   padding: 20px 200px;
+}
+
+.own_btn:active {
+   position: relative;
+   top: 2px;
+}

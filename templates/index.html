@@ -2,9 +2,10 @@
 <html>
 
 <head>
-   <title>ГОСТ Ассистент</title>
+   <title>SMART TRASH</title>
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+   <link rel="website icon" type="png" href="{{ url_for('static', filename='favicon.jpg') }}">
 </head>
 
 <body>
@@ -14,9 +15,9 @@
       <div class="wrap">
          <div class="nav">
             <img src="{{url_for('static', filename = 'logo.png')}}" alt="logo" class="logo">
-            <p class="nav_title" class="logo_text">GOST ASSISTANT</p>
+            <p class="nav_title" class="logo_text">SMART TRASH</p>
          </div>
-         <a href="#!" class="sign_up" id="open_pop_up">Log IN</a>
+         <a href="#!" class="sign_up" id="open_pop_up">Войти</a>
 
       </div>
 
@@ -37,18 +38,13 @@
 
    </header>
 
-   <section class="section">
-      <div class="section_wrap">
-         <p class="section_text">
-            GOST ASSISTANT
-         </p>
-      </div>
-   </section>
+   <div class="container" id="chat">
+      <!-- Сообщения будут добавляться здесь -->
+   </div>
 
-   <section class="btn_send">
-      <div class="btn_send_wrap">
-         <a class="own_btn" href="#!">Upload your text document</a>
-      </div>
+   <section class="send_message " id="chat">
+      <input id="input" type="text" class="input-message" placeholder="Какой у тебя мусор?">
+      <div> <a href="#!" class="btn_message" onclick="getValue()">Send</a></div>
    </section>
 
    <script src="{{ url_for('static', filename = 'main.js') }}"></script>

@@ -13,3 +13,33 @@ document.addEventListener('DOMContentLoaded', function () {
       popup.style.opacity = '0';
    });
 });
+
+
+
+
+let inputElement = document.getElementById("input");
+let chat = document.getElementById("chat");
+
+//Приветствие
+function hello() {
+   var newelement = document.createElement("div");
+   newelement.innerHTML += '<div id="hello">Привет</div>';
+   newelement.className = 'PersonMessege';
+   newelement.style.left = '5%';
+   chat.prepend(newelement);
+}
+setTimeout(hello, 2000);
+
+function getValue() {
+   //удаление приветсвия
+   var hello = document.getElementById("hello");
+   // hello.parentNode.remove(); - это фиксить
+   //вывод сообщения пользователя
+   var inputValue = inputElement.value;
+   var newelement = document.createElement("div");
+   newelement.innerHTML += '<div>' + inputValue + '</div>';
+   newelement.className = 'PersonMessege';
+   chat.prepend(newelement);
+   inputElement.value = '';
+   //обработка сообщения
+}

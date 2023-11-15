@@ -28,7 +28,7 @@ function hello() {
    newelement.style.left = '5%';
    chat.prepend(newelement);
 }
-setTimeout(hello, 2000);
+setTimeout(hello, 1500);
 
 function getValue() {
    //удаление приветсвия

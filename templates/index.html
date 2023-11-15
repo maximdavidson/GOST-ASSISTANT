@@ -26,11 +26,11 @@
             <div class="pop_up_close" id="pop-up-close">✖</div>
             <div class="pop_up_body">
                <h1>Registration</h1>
-               <form action="">
-                  <input type="text" placeholder="Имя пользователя" id="username">
-                  <input type="email" placeholder="Электронная почта" id="email">
-                  <input type="password" placeholder="Пароль" id="password">
-                  <button id="register_btn">Registration</button>
+               <form action="/register" method="post">
+                  <input type="text" placeholder="Имя пользователя" name="username" id="username">
+                  <input type="tel" placeholder="Номер телефона" name="phone" id="phone">
+                  <input type="password" placeholder="Пароль" name="password" id="password">
+                  <button type="submit" id="register_btn">Вход</button>
                </form>
             </div>
          </div>

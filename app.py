@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, json
 import mysql.connector
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.config['FLASK_ENV'] = 'development'  # для изменений в реальном времени
@@ -35,6 +36,26 @@ def create_table(connection):
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/register', methods = ['POST'])
+def register():
+    data = request.get_json()
+    username = data['username']
+    phone = data['phone']
+    password = data['password']
+
+    # Генерация хеша пароля
+    password_hash = generate_password_hash(password)
+
+    connection = create_connection()
+    cursor = connection.cursor()
+
+    # Сохранение хеша пароля в базе данных
+    query = "INSERT INTO users (username, phone, password) VALUES (%s, %s, %s)"
+    values = (username, phone, password_hash)
+
+    cursor.execute(query,values)
+    connection.commit()
 
 @app.route('/login', methods=['POST'])
 def login():

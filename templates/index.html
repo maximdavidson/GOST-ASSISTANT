@@ -25,13 +25,20 @@
          <div class="pop_up_container">
             <div class="pop_up_close" id="pop-up-close">✖</div>
             <div class="pop_up_body">
-               <h1>Registration</h1>
-               <form action="/register" method="post">
-                  <input type="text" placeholder="Имя пользователя" name="username" id="username">
-                  <input type="tel" placeholder="Номер телефона" name="phone" id="phone">
-                  <input type="password" placeholder="Пароль" name="password" id="password">
-                  <button type="submit" id="register_btn">Вход</button>
+               <h1>Вход</h1>
+               {% if username %}
+               <p>Добро пожаловать, {{ username }}!</p>
+               {% else %}
+               <form action="/login" method="post">
+                  <label for="username">Имя пользователя:</label>
+                  <input type="text" id="username" name="username"><br><br>
+                  <label for="phone">Номер телефона:</label>
+                  <input type="tel" id="phone" name="phone"><br><br>
+                  <label for="password">Пароль:</label>
+                  <input type="password" id="password" name="password"><br><br>
+                  <input type="submit" value="Войти">
                </form>
+               {% endif %}
             </div>
          </div>
       </div>
@@ -48,7 +55,6 @@
    </section>
 
    <script src="{{ url_for('static', filename = 'main.js') }}"></script>
-
 </body>
 
 </html>

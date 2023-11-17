@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, json
 import mysql.connector
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ def create_table(connection):
         id INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(40) NOT NULL,
         phone VARCHAR(40),
-        password VARCHAR(40) NOT NULL
+        password VARCHAR(64) NOT NULL
     )
     """
     cursor.execute(query)
@@ -36,23 +36,26 @@ def create_table(connection):
 def home():
     return render_template('index.html')
 
-@app.route('/register', methods=['POST'])
-def register():
-    username = request.form['username']
-    phone = request.form['phone']
-    password = request.form['password']
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json() #извлекает JSON-данные из запроса и преобразует их в словарь Python
+    username = data['username']
+    phone = data['phone']
+    password = data['password']
 
     connection = create_connection()
-    create_table(connection)
     cursor = connection.cursor()
 
-    query = "INSERT INTO users (username, phone, password) VALUES(%s, %s, %s)"
+    query = "SELECT * FROM users WHERE username = %s AND phone = %s AND password = %s" 
     values = (username, phone, password)
 
     cursor.execute(query, values)
-    connection.commit()
+    result = cursor.fetchone() #извлекает следующую строку результата запроса и возвращает ее в виде кортежа.
 
-    return redirect('/')
+    if result:
+        return json.dumps({'username': result[1]})
+    else:
+        return json.dumps({'error': 'User not found'})
 
 
 if __name__ == '__main__':

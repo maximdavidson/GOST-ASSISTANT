@@ -4,6 +4,7 @@
 <head>
    <title>SMART TRASH</title>
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='media.css') }}">
    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
    <link rel="website icon" type="png" href="{{ url_for('static', filename='favicon.jpg') }}">
 </head>
@@ -48,11 +49,12 @@
    <div class="container" id="chat">
       <!-- Сообщения будут добавляться здесь -->
    </div>
-
-   <section class="send_message " id="chat">
+   <section class="send_message ">
       <input id="input" type="text" class="input-message" placeholder="Какой у тебя мусор?">
-      <div> <a href="#!" class="btn_message" onclick="getValue()">Send</a></div>
+      <div> <a href="#!" class="btn_message" onclick="SendMessege()"><img
+               src="{{url_for('static', filename = 'row.png')}}" alt=""></a></div>
    </section>
+
 
    <script src="{{ url_for('static', filename = 'main.js') }}"></script>
 </body>

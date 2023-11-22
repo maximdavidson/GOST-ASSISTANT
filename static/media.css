@@ -1,15 +1,38 @@
 @media(max-width: 1100px) {
+
+   .logo {
+      max-width: 80px;
+   }
+
+   .nav_title {
+      font-size: 28px;
+   }
+
+   .sign_up {
+      padding: 12px 20px;
+      font-size: 18px;
+   }
+
    .send_message {
       grid-gap: 25px;
       align-items: center;
-      margin-left: 200px;
+      margin-left: 100px;
       grid-gap: 10px;
    }
 
    .input-message {
-      width: 400px;
+      width: 650px;
       margin-left: 10px;
       margin-bottom: 10px;
+      font-size: 24px;
+   }
+
+   .Messege {
+      font-size: 25px;
+   }
+
+   .btn-wrapp {
+      padding-right: 15px;
    }
 
    .container {
@@ -17,6 +40,11 @@
    }
 
    .btn_message {
+      padding: 18px 20px 14px 20px;
+   }
+
+   .camera-input-label {
+
       padding: 18px 20px 14px 20px;
    }
 }

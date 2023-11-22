@@ -51,8 +51,18 @@
    </div>
    <section class="send_message ">
       <input id="input" type="text" class="input-message" placeholder="Какой у тебя мусор?">
-      <div> <a href="#!" class="btn_message" onclick="SendMessege()"><img
-               src="{{url_for('static', filename = 'row.png')}}" alt=""></a></div>
+      <div class="btn-wrapp">
+         <a href="#!" class="btn_message" onclick="SendMessege()"><img src="{{url_for('static', filename = 'row.png')}}"
+               alt=""></a>
+      </div>
+
+      <div style="width: max-content; height: auto; display: inline-block;">
+         <label class="camera-input-label" for="camera-input">
+            <input id="camera-input" type="file" accept="image/png, image/jpg, image/gif, image/jpeg"
+               capture="environment" style="display: none;">
+            <img class="camera-btn" src="{{url_for('static', filename = 'cameraIcon.svg')}}" alt="">
+         </label>
+      </div>
    </section>
 
 

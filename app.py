@@ -1,10 +1,16 @@
 from flask import Flask, render_template, request, redirect, json
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
 app.config['FLASK_ENV'] = 'development'  # для изменений в реальном времени
 
+#note. This is a new dependancy. use "pip install roboflow" before using this
+from roboflow import Roboflow
+rf = Roboflow(api_key="aN58mrsroC9b5xUNVjGd")
+project = rf.workspace().project("garbage-classification-3")
+model = project.version(2).model
 
 def create_connection():
     connection = mysql.connector.connect(
@@ -78,6 +84,54 @@ def login():
     else:
         return json.dumps({'error': 'User not found'})
 
+def isValidExt (ALLOWED_EXTENSIONS,file_name):
+    file_ext = os.path.splitext(file_name)[1]
+    print(file_ext)
+    if file_ext not in ALLOWED_EXTENSIONS:
+        return 0
+    return 1
+
+@app.route('/processimage', methods = ['POST'])
+def processimage ():
+    translation = {
+      "PLASTIC": "Пластик",
+      "BIODEGRADABLE" : "Биоразлагаемый",
+      "CARDBOARD" : "Картон",
+      "CLOTH" : "Ткань",
+      "GLASS" : "Стекло",
+      "METAL" : "Метал",
+      "PAPER" : "Бумага"
+    }
+    
+    if 'imageFile' not in request.files:
+        return json.dumps({'result': 'error: empty file input field'})  
+    image = request.files.get('imageFile')
+    ALLOWED_EXTENSIONS = set(['.png', '.jpg', '.jpeg', '.gif'])
+    
+    #and request.args.get('type') == '1'
+    if image and isValidExt(ALLOWED_EXTENSIONS,image.filename):
+        print('FileStorage:', image)
+        print('filename:', image.filename)
+        
+        if image.filename == '':
+            return json.dumps({'result': 'error: No selected file'}) 
+        
+        #if image.verify() == false:
+        #   return json.dumps({'result': 'error: not an image'}) 
+        try:    
+            image.save("temp.png")
+            prediction = model.predict("temp.png", confidence=40, overlap=30).json()
+            os.remove("temp.png")
+            if len(prediction['predictions']) == 0:
+                return json.dumps({'result': 'В фотографии ничего не найдено'})
+            print(prediction['predictions'][0]['class'])
+            print(prediction)
+            return json.dumps({'result': translation[prediction['predictions'][0]['class']]})
+        except Exception as error:
+            print(error)
+            return json.dumps({'result': 'Программа вывела ошибку!'})
+    else:
+        return json.dumps({'result': 'Файл не является изображением'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host = "0.0.0.0")

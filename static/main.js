@@ -89,14 +89,9 @@ const paperItems = [
 
 //Приветствие
 function ChatMessege(text) {
-<<<<<<< HEAD
    if (imgDebounce) {
       return
    }
-=======
-	if (imgDebounce){
-	return}
->>>>>>> aff90ad2d7c50574a7143d2d811510510c4686df
    return new Promise(function (resolve) {
       setTimeout(function () {
          var newelement = document.createElement("div");
@@ -146,20 +141,12 @@ inputElement.addEventListener("keyup", function (event) {
       event.preventDefault();
       SendMessege();
    }
-<<<<<<< HEAD
 });
 
 function SendMessege() {
    if (imgDebounce) {
       return
    }
-=======
-});	
-	
-function SendMessege() {
-	if (imgDebounce){
-	return}
->>>>>>> aff90ad2d7c50574a7143d2d811510510c4686df
    //удаление приветсвия
    var inputValue = inputElement.value;
    if (inputValue == '')
@@ -262,7 +249,6 @@ let CameraCamlabel = document.getElementsByClassName("camera-input-label")[0]
 let CameraInput = document.getElementById("camera-input")
 
 CameraInput.addEventListener('change', function () {
-<<<<<<< HEAD
    //now AI part
 
    if (imgDebounce) {
@@ -315,56 +301,4 @@ CameraInput.addEventListener('change', function () {
 
    img.src = url;
    cameraoutput.src = URL.createObjectURL(file);
-=======
-	//now AI part
-	
-	if (imgDebounce){
-	return}
-	
-	imgDebounce = true;
-	var _URL = window.URL || window.webkitURL;
-	let file = event.target.files[0]
-	const formData = new FormData();
-	formData.append('imageFile', file);
-	var newelement = document.createElement("div");
-	//newelement.innerHTML += 
-	newelement.className = 'imgMessege';
-	chat.appendChild(newelement);
-	
-	
-	
-	//обработка сообщения
-	var cameraoutput = document.createElement("img");
-	cameraoutput.id = 'camera-output';
-	newelement.append(cameraoutput)
-	
-	var url = URL.createObjectURL(this.files[0]);
-	var img = new Image;
-	
-	img.onload = function() {
-		console.log(img.width + ' ' + img.height);
-		cameraoutput.style.width = 100%
-		//cameraoutput.style.height = 50%
-		URL.revokeObjectURL(img.src);
-		fetch('/processimage', {
-		  method: 'POST',
-	//    headers: {
-	//       'Content-Type': 'application/json',
-	//    },
-		  body: formData
-		})
-		  .then(response => response.json())
-		  .then(data => {
-			  imgDebounce = false;
-			 if (data) {
-				ChatMessege(data.result);
-			 } else if (data.error) {
-				alert(data.error);
-			 }
-		  });
-		};
-
-	img.src = url;
-	cameraoutput.src = URL.createObjectURL(file);
->>>>>>> aff90ad2d7c50574a7143d2d811510510c4686df
 });

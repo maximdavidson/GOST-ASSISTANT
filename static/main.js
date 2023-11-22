@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
    });
 });
 
-
+imgDebounce = false;
 
 
 document.querySelector('form').addEventListener('submit', function (event) {
@@ -89,6 +89,8 @@ const paperItems = [
 
 //Приветствие
 function ChatMessege(text) {
+	if (imgDebounce){
+	return}
    return new Promise(function (resolve) {
       setTimeout(function () {
          var newelement = document.createElement("div");
@@ -138,8 +140,11 @@ inputElement.addEventListener("keyup", function (event) {
       event.preventDefault();
       SendMessege();
    }
-});
+});	
+	
 function SendMessege() {
+	if (imgDebounce){
+	return}
    //удаление приветсвия
    var inputValue = inputElement.value;
    if (inputValue == '')
@@ -196,3 +201,60 @@ function SendMessege() {
    Map();
    ScrollDown(3500);
 }
+
+
+let CameraCamlabel = document.getElementsByClassName("camera-input-label")[0]
+let CameraInput = document.getElementById("camera-input")
+
+CameraInput.addEventListener('change', function () {
+	//now AI part
+	
+	if (imgDebounce){
+	return}
+	
+	imgDebounce = true;
+	var _URL = window.URL || window.webkitURL;
+	let file = event.target.files[0]
+	const formData = new FormData();
+	formData.append('imageFile', file);
+	var newelement = document.createElement("div");
+	//newelement.innerHTML += 
+	newelement.className = 'imgMessege';
+	chat.appendChild(newelement);
+	
+	
+	
+	//обработка сообщения
+	var cameraoutput = document.createElement("img");
+	cameraoutput.id = 'camera-output';
+	newelement.append(cameraoutput)
+	
+	var url = URL.createObjectURL(this.files[0]);
+	var img = new Image;
+	
+	img.onload = function() {
+		console.log(img.width + ' ' + img.height);
+		cameraoutput.style.width = 100%
+		//cameraoutput.style.height = 50%
+		URL.revokeObjectURL(img.src);
+		fetch('/processimage', {
+		  method: 'POST',
+	//    headers: {
+	//       'Content-Type': 'application/json',
+	//    },
+		  body: formData
+		})
+		  .then(response => response.json())
+		  .then(data => {
+			  imgDebounce = false;
+			 if (data) {
+				ChatMessege(data.result);
+			 } else if (data.error) {
+				alert(data.error);
+			 }
+		  });
+		};
+
+	img.src = url;
+	cameraoutput.src = URL.createObjectURL(file);
+});

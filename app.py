@@ -134,4 +134,8 @@ def processimage ():
         return json.dumps({'result': 'Файл не является изображением'})
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug=True, host = "0.0.0.0")
+=======
+    app.run(debug=True)
+>>>>>>> aff90ad2d7c50574a7143d2d811510510c4686df
